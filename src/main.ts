@@ -8,7 +8,7 @@ const h:number=window.innerHeight;
 const ratio:number=w/h;
 const fov:number=75;
 const near:number=0.1;
-const far:number=10;;
+const far:number=10;
 
 const renderer=new THREE.WebGLRenderer({antialias:true})
 
@@ -19,12 +19,26 @@ document.body.appendChild(renderer.domElement)
 const camera=new THREE.PerspectiveCamera(fov,ratio,near,far)
 camera.position.z=2
 const scene=new THREE.Scene()
-const geo=new THREE.IcosahedronGeometry
-const mat=new THREE.MeshBasicMaterial({
-  color:"#dd3d44"
+const geo=new THREE.IcosahedronGeometry(1.0,2)
+
+ //The material used for the mesh.
+
+const mat=new THREE.MeshStandardMaterial({
+  color:"0xffffff",
+  flatShading:true
 })
-const mesh=new THREE.Mesh(geo,mat)
-scene.add(mesh)
+const light=new THREE.HemisphereLight(0x002288,0x99cb00)
+scene.add(light)
+const mesh=new THREE.Mesh(geo,mat)//geometry + material creates a mesh 
+scene.add(mesh)//then mesh added to the scene
+
+//wire mesh
+const wire=new THREE.MeshBasicMaterial({
+  color:0x9900000,
+  wireframe:true
+})
+const wiremesh =new THREE.Mesh(geo,wire)
+mesh.add(wiremesh)
 renderer.render(scene,camera)
 
 
