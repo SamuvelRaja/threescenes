@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from "three"
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 
 const w:number=window.innerWidth;
@@ -32,6 +33,9 @@ scene.add(light)
 const mesh=new THREE.Mesh(geo,mat)//geometry + material creates a mesh 
 scene.add(mesh)//then mesh added to the scene
 
+const controls=new OrbitControls(camera,renderer.domElement)
+controls.enableDamping=true
+controls.dampingFactor=0.03
 //wire mesh
 const wire=new THREE.MeshBasicMaterial({
   color:0x9900000,
@@ -39,6 +43,12 @@ const wire=new THREE.MeshBasicMaterial({
 })
 const wiremesh =new THREE.Mesh(geo,wire)
 mesh.add(wiremesh)
-renderer.render(scene,camera)
 
 
+//animate scene
+function animate(){
+  requestAnimationFrame(animate)
+  renderer.render(scene,camera)
+  controls.update()
+}
+animate()
