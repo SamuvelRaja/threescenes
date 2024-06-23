@@ -1,4 +1,4 @@
-import './style.css'
+
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
@@ -11,6 +11,14 @@ const fov:number=75;
 const near:number=0.1;
 const far:number=10;
 
+export const mainOptions = {
+  w: w,
+  h: h,
+  ratio: ratio,
+  fov: fov,
+  near: near,
+  far: far
+};
 const renderer=new THREE.WebGLRenderer({antialias:true})
 
 renderer.setSize(w,h);
@@ -25,7 +33,7 @@ const geo=new THREE.IcosahedronGeometry(1.0,2)
  //The material used for the mesh.
 
 const mat=new THREE.MeshStandardMaterial({
-  color:"0xffffff",
+  color:0xffffff,
   flatShading:true
 })
 const light=new THREE.HemisphereLight(0x002288,0x99cb00)
@@ -38,7 +46,7 @@ controls.enableDamping=true
 controls.dampingFactor=0.03
 //wire mesh
 const wire=new THREE.MeshBasicMaterial({
-  color:0x9900000,
+  color:0x990000,
   wireframe:true
 })
 const wiremesh =new THREE.Mesh(geo,wire)
