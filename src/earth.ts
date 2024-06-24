@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { mainOptions } from "./main";
-
+import getStarfield from "./stars";
 
 //reusing renderer options
 const { w, h, fov, ratio, near, far } = mainOptions;
@@ -14,7 +14,7 @@ earthRenderer.toneMapping = THREE.ACESFilmicToneMapping;
 earthRenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 //adding camera
-const earthCamera=new THREE.PerspectiveCamera(fov,ratio,near,far)
+const earthCamera=new THREE.PerspectiveCamera(fov,ratio,near,1000)
 earthCamera.position.z=3
 const earthScene=new THREE.Scene()
 
@@ -57,8 +57,12 @@ const earthCloud=new THREE.MeshStandardMaterial({
     alphaMap: loader.load('./textures/05_earthcloudmaptrans.jpg'),
     })
 const cloudMesh=new THREE.Mesh(earthGeo,earthCloud)
+cloudMesh.scale.setScalar(1.003);
 earthGroup.add(cloudMesh)
 
+const stars = getStarfield({numStars: 3000});
+
+earthScene.add(stars);
 
 //adding sunlight
 const sunlight=new THREE.DirectionalLight(0xffffff,2)
@@ -70,7 +74,8 @@ function earthAnimate(){
     earthMesh.rotation.y+=0.003
     lightMesh.rotation.y+=0.003
     cloudMesh.rotation.y+=0.003
+     stars.rotation.y -= 0.0002;
     earthRenderer.render(earthScene,earthCamera)
-    controls.update
+        controls.update()    
 }
 earthAnimate()
