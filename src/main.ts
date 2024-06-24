@@ -44,6 +44,7 @@ scene.add(mesh)//then mesh added to the scene
 const controls=new OrbitControls(camera,renderer.domElement)
 controls.enableDamping=true
 controls.dampingFactor=0.03
+controls.enableZoom=false
 //wire mesh
 const wire=new THREE.MeshBasicMaterial({
   color:0x990000,
