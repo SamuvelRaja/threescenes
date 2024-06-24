@@ -1,7 +1,7 @@
 
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-
+import resize from "./helper/resize";
 
 const w:number=window.innerWidth;
 const h:number=window.innerHeight;
@@ -61,3 +61,5 @@ function animate(){
   controls.update()
 }
 animate()
+
+resize(camera,renderer)

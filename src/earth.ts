@@ -1,7 +1,8 @@
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { mainOptions } from "./main";
-import getStarfield from "./stars";
+import getStarfield from "./helper/stars";
+import resize from "./helper/resize";
 
 //reusing renderer options
 const { w, h, fov, ratio, near, far } = mainOptions;
@@ -79,3 +80,6 @@ function earthAnimate(){
         controls.update()    
 }
 earthAnimate()
+
+resize(earthCamera,earthRenderer)
+
