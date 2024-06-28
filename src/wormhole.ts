@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import spline from "./helper/spline";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
+import { EffectComposer, OrbitControls, RenderPass, UnrealBloomPass } from "three/examples/jsm/Addons.js";
 import resize from "./helper/resize";
 
 const w = window.innerWidth;
@@ -19,7 +19,7 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
-
+controls.enableZoom=false
 
 
 
@@ -29,11 +29,11 @@ controls.dampingFactor = 0.03;
     color:0xff0000,
     wireframe:true
   })
-  const tubeMesh=new THREE.Mesh(tubeGeo,tubeMat)
+  // const tubeMesh=new THREE.Mesh(tubeGeo,tubeMat)
 
 
-  const edges=new THREE.EdgesGeometry(tubeGeo)
-  const lineMat=new THREE.LineBasicMaterial({color:0xffffff})
+  const edges=new THREE.EdgesGeometry(tubeGeo,0.2)
+  const lineMat=new THREE.LineBasicMaterial({color:0x0000ff})
   const lineseg=new THREE.LineSegments(edges,lineMat)
   scene.add(lineseg)
 
@@ -42,7 +42,7 @@ controls.dampingFactor = 0.03;
 
   function updateCamera(t:any){
       const time = t * 0.1;
-      const looptime = 10 * 1000;
+      const looptime = 5 * 1000;
       const p = (time % looptime) / looptime;
       const pos = tubeGeo.parameters.path.getPointAt(p);
       const lookAt = tubeGeo.parameters.path.getPointAt((p + 0.03) % 1);
@@ -50,12 +50,23 @@ controls.dampingFactor = 0.03;
       camera.lookAt(lookAt);
   }
 
+  // post-processing
+    const renderScene = new RenderPass(scene, camera);
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.5, 0.4, 100);
+    bloomPass.threshold = 0.002;
+    bloomPass.strength = 3.5;
+    bloomPass.radius = 0;
+    const composer = new EffectComposer(renderer);
+    composer.addPass(renderScene);
+    composer.addPass(bloomPass);
+
+
 resize(camera,renderer)
 
 function animate(t=0){
   updateCamera(t)
   requestAnimationFrame(animate)
-  renderer.render(scene,camera)
+  composer.render(scene,camera)
   controls.update()
 }
 animate()
