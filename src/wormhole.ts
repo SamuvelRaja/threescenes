@@ -14,7 +14,12 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(w, h);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
+const h2=document.createElement("h2")
+h2.innerText="3) PORTAL TO NOWHERE"
+
+document.body.appendChild(h2)
 document.body.appendChild(renderer.domElement);
+
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -33,7 +38,7 @@ controls.enableZoom=false
 
 
   const edges=new THREE.EdgesGeometry(tubeGeo,0.2)
-  const lineMat=new THREE.LineBasicMaterial({color:0x0000ff})
+  const lineMat=new THREE.LineBasicMaterial({color:0x51ff0d})
   const lineseg=new THREE.LineSegments(edges,lineMat)
   scene.add(lineseg)
 
@@ -42,7 +47,7 @@ controls.enableZoom=false
 
   function updateCamera(t:any){
       const time = t * 0.1;
-      const looptime = 5 * 1000;
+      const looptime = 10 * 1000;
       const p = (time % looptime) / looptime;
       const pos = tubeGeo.parameters.path.getPointAt(p);
       const lookAt = tubeGeo.parameters.path.getPointAt((p + 0.03) % 1);
@@ -59,7 +64,33 @@ controls.enableZoom=false
     const composer = new EffectComposer(renderer);
     composer.addPass(renderScene);
     composer.addPass(bloomPass);
-
+  
+   const numAtoms = 55;
+const atomGeo = new THREE.SphereGeometry( 0.10, 10, 10, 180, 6.28, 0, 3.14 );
+for (let i = 0; i < numAtoms; i += 1) {
+  const atomMat = new THREE.MeshBasicMaterial({
+    color: 0x0098c4,
+    wireframe: true
+  });
+  const atom = new THREE.Mesh(atomGeo, atomMat);
+  const p = (i / numAtoms + Math.random() * 0.1) % 1;
+  const pos = tubeGeo.parameters.path.getPointAt(p);
+  pos.x += Math.random() - 0.4;
+  pos.z += Math.random() - 0.5;
+  atom.position.copy(pos);
+  const rote = new THREE.Vector3(
+    Math.random() * Math.PI,
+    Math.random() * Math.PI,
+    Math.random() * Math.PI
+  );
+  atom.rotation.set(rote.x, rote.y, rote.z);
+  const edges = new THREE.EdgesGeometry(atomGeo, 0.2);
+  const lineMat = new THREE.LineBasicMaterial({ color:0x0098c4 });
+  const atomLines = new THREE.LineSegments(edges, lineMat);
+  atomLines.position.copy(pos);
+  atomLines.rotation.set(rote.x, rote.y, rote.z);
+  scene.add(atomLines);
+}
 
 resize(camera,renderer)
 

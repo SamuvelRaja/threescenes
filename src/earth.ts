@@ -10,7 +10,13 @@ const { w, h, fov, ratio, near, far } = mainOptions;
 //adding renderer
 const earthRenderer=new THREE.WebGLRenderer({antialias:true})
 earthRenderer.setSize(w,h)
+const h2=document.createElement("h2")
+h2.innerText="2) TERRA(EARTH-616)"
+document.body.appendChild(h2)
 document.body.appendChild(earthRenderer.domElement)
+
+
+
 earthRenderer.toneMapping = THREE.ACESFilmicToneMapping;
 earthRenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 

@@ -22,8 +22,11 @@ export const mainOptions = {
 const renderer=new THREE.WebGLRenderer({antialias:true})
 
 renderer.setSize(w,h);
-
+const h2=document.createElement("h2")
+h2.innerText="1)ORB OF DYSTOPIA"
+document.body.appendChild(h2)
 document.body.appendChild(renderer.domElement)
+
 
 const camera=new THREE.PerspectiveCamera(fov,ratio,near,far)
 camera.position.z=2
