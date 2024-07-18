@@ -30,11 +30,7 @@ controls.enableZoom=false
 
 
   const tubeGeo=new THREE.TubeGeometry(spline, 222, 0.65, 16, true)
-  const tubeMat=new THREE.MeshBasicMaterial({
-    color:0xff0000,
-    wireframe:true
-  })
-  // const tubeMesh=new THREE.Mesh(tubeGeo,tubeMat)
+
 
 
   const edges=new THREE.EdgesGeometry(tubeGeo,0.2)
@@ -97,7 +93,7 @@ resize(camera,renderer)
 function animate(t=0){
   updateCamera(t)
   requestAnimationFrame(animate)
-  composer.render(scene,camera)
+  composer.render()
   controls.update()
 }
 animate()
