@@ -14,10 +14,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(w, h);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-const h2=document.createElement("h2")
-h2.innerText="3) PORTAL TO NOWHERE"
 
-document.body.appendChild(h2)
 document.body.appendChild(renderer.domElement);
 
 

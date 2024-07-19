@@ -11,25 +11,16 @@ const fov:number=75;
 const near:number=0.1;
 const far:number=10;
 
-export const mainOptions = {
-  w: w,
-  h: h,
-  ratio: ratio,
-  fov: fov,
-  near: near,
-  far: far
-};
+
 const renderer=new THREE.WebGLRenderer({antialias:true})
 
 renderer.setSize(w,h);
-const h2=document.createElement("h2")
-h2.innerText="1)ORB OF DYSTOPIA"
-document.body.appendChild(h2)
-document.body.appendChild(renderer.domElement)
+
+document.querySelector("#app")?.appendChild(renderer.domElement)
 
 
 const camera=new THREE.PerspectiveCamera(fov,ratio,near,far)
-camera.position.z=2
+camera.position.z=3
 const scene=new THREE.Scene()
 const geo=new THREE.IcosahedronGeometry(1.0,5)
 

@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { mainOptions } from "./main";
+import { mainOptions } from "./helper/option";
 import getStarfield from "./helper/stars";
 import resize from "./helper/resize";
 
@@ -10,9 +10,7 @@ const { w, h, fov, ratio, near} = mainOptions;
 //adding renderer
 const earthRenderer=new THREE.WebGLRenderer({antialias:true})
 earthRenderer.setSize(w,h)
-const h2=document.createElement("h2")
-h2.innerText="2) TERRA(EARTH-616)"
-document.body.appendChild(h2)
+
 document.body.appendChild(earthRenderer.domElement)
 
 

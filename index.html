@@ -5,12 +5,28 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="./src/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="app"></div>
+    <header class="bg-[#1c1c1c]">
+      <nav class="flex flex-col md:flex-row ">
+        <h2>
+          Three demos
+        </h2>
+        <div class="no-underline flex flex-col md:flex-row">
+          <a href="/">3D Orb</a>
+          <a href="/earth.html">3D earth</a>
+          <a href="/wormhole.html">3D wormhole</a>
+        </div>
+      </nav>
+    </header>
+    <div class="fixed-con">
+      <div id="app">
+
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
-    <script type="module" src="/src/earth.ts"></script>
-    <script type="module" src="/src/wormhole.ts"></script>
   </body>
 </html>

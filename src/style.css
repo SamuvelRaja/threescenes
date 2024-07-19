@@ -9,5 +9,51 @@ body {
   overflow-x: hidden;
   background-color: rgb(1, 8, 9);
   color: #FFF;
+  font-family: 'Inter', sans-serif;
 }
 
+.fixed-con{
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  height:100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+header{
+  background:#1C1C1C;
+  padding: 16px 24px;
+  position: relative;
+  z-index:99;
+}
+header nav{
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+nav div{
+  display: flex;
+  gap: 32px;
+}
+header h2{
+  width: fit-content;
+}
+nav a{
+  text-decoration: none;
+  
+  color: #fff;
+  display: block;
+  transition: all ease-in 0.3s;
+}
+header:hover a{
+  font-size: 18px;
+}
+nav a:hover{
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #ff8a00, #e52e71);
+}
