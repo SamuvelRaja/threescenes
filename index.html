@@ -28,39 +28,6 @@
       </div>
     </div>
     
-    <script type="module">
-      import orb from "./src/main.ts" 
-      import earth from "./src/earth.ts"
-      import worm from "./src/wormhole.ts"
-
-      
-
-      orb()
-      const loadBtn=document.querySelectorAll('button')
-      loadBtn.forEach((btn)=>{
-        btn.addEventListener("click",function(e){
-          const load=this.getAttribute("data-load")
-          switch(load){
-            case "orb":
-              renderer.dispose()
-              querySelector("#app").innerHTML="";
-              orb()
-            break;
-            case "earth":
-            renderer.dispose()
-            querySelector("#app").innerHTML="";
-              earth()
-            break;
-            case "worm":
-            renderer.dispose()
-            querySelector("#app").innerHTML="";
-              worm()
-            break;
-            default:
-              break
-          }
-        })
-      })
-    </script>
+    <script type="module" src="./src/index.ts"></script>
   </body>
 </html>
