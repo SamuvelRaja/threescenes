@@ -16,9 +16,9 @@
           Three.js demos
         </h2>
         <div >
-          <a href="/">3D Orb</a>
-          <a href="/earth.html">3D earth</a>
-          <a href="/wormhole.html">3D wormhole</a>
+          <button data-load="orb">3D Orb</button>
+          <button data-load="earth">3D earth</button>
+          <button data-load="worm">3D wormhole</button>
         </div>
       </nav>
     </header>
@@ -27,6 +27,40 @@
 
       </div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
+    
+    <script type="module">
+      import orb from "./src/main.ts" 
+      import earth from "./src/earth.ts"
+      import worm from "./src/wormhole.ts"
+
+      
+
+      orb()
+      const loadBtn=document.querySelectorAll('button')
+      loadBtn.forEach((btn)=>{
+        btn.addEventListener("click",function(e){
+          const load=this.getAttribute("data-load")
+          switch(load){
+            case "orb":
+              renderer.dispose()
+              querySelector("#app").innerHTML="";
+              orb()
+            break;
+            case "earth":
+            renderer.dispose()
+            querySelector("#app").innerHTML="";
+              earth()
+            break;
+            case "worm":
+            renderer.dispose()
+            querySelector("#app").innerHTML="";
+              worm()
+            break;
+            default:
+              break
+          }
+        })
+      })
+    </script>
   </body>
 </html>
